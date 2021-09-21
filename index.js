@@ -30,6 +30,7 @@ async function handleSubmit() {
   inputText = textArea.value;
   const data = await getResponse(inputText);
   hideLoadingAnimation(true);
+
   let dataResults = data.result;
 
   polarityText.innerText = `Polarity : ${dataResults.polarity}`;
@@ -57,11 +58,17 @@ async function getResponse(text) {
       },
       body: JSON.stringify({ text }),
     });
+    assertResponseOk(response);
     const data = await response.json();
     console.log(data);
+    console.log(response.status);
+    showErrorCat(response.status);
     return data;
   } catch (error) {
-    console.log("please enter at least some text");
+    console.log("there was an error" + error.message);
+    renderError(
+      `Whoops! Something went wrong. try analaysing THAT! error message: ${error.message}`
+    );
   }
 }
 
@@ -72,10 +79,19 @@ function assertTextFilled() {
   }
 }
 
+function assertResponseOk(response) {
+  if (!response.ok) {
+    console.log(response.status);
+    showErrorCat(response.status);
+    hideLoadingAnimation(true);
+  }
+}
+
 function hideLoadingAnimation(state) {
   loadingText.hidden = state;
 }
 
 function showErrorCat(code) {
+  errorImage.hidden = false;
   errorImage.src = `https://http.cat/${code}`;
 }
