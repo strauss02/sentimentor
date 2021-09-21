@@ -9,6 +9,7 @@ const textArea = document.querySelector("#input-text");
 const polarityText = document.querySelector("#polarity-text");
 const chargeText = document.querySelector("#charge-text");
 const resultHeaders = document.querySelector(".result-headers");
+const resultContainer = document.querySelector(".results-container");
 
 const errorText = document.querySelector(".error-text");
 
@@ -22,14 +23,14 @@ submitButton.addEventListener("click", handleSubmit);
 
 /************************ Main Functions ************************/
 //TODO: Add function docs
-//TODO: disable ability to send empty text
 
 async function handleSubmit() {
   assertTextFilled();
-  hideLoadingAnimation(false);
+  hideElements([loadingText, resultContainer], [false, true]);
+  cleanErrors();
   inputText = textArea.value;
   const data = await getResponse(inputText);
-  hideLoadingAnimation(true);
+  hideElements([loadingText, resultContainer], [true, false]);
 
   let dataResults = data.result;
 
@@ -60,21 +61,19 @@ async function getResponse(text) {
     });
     assertResponseOk(response);
     const data = await response.json();
-    console.log(data);
-    console.log(response.status);
     showErrorCat(response.status);
     return data;
   } catch (error) {
-    console.log("there was an error" + error.message);
     renderError(
       `Whoops! Something went wrong. try analaysing THAT! error message: ${error.message}`
     );
   }
 }
 
+//Checks if textarea isn't empty
 function assertTextFilled() {
   if (textArea.validity.valueMissing) {
-    renderError("you must enter some kinda text man");
+    renderError("you must enter some kinda text, man");
     throw "not filled";
   }
 }
@@ -83,15 +82,22 @@ function assertResponseOk(response) {
   if (!response.ok) {
     console.log(response.status);
     showErrorCat(response.status);
-    hideLoadingAnimation(true);
+    hideElements([loadingText], [true]);
   }
 }
 
-function hideLoadingAnimation(state) {
-  loadingText.hidden = state;
+//recieves two arrays, one with elements, the second with states. they are matched by index.
+function hideElements(elements, states) {
+  elements.forEach(function (element, index) {
+    element.hidden = states[index];
+  });
 }
 
 function showErrorCat(code) {
-  errorImage.hidden = false;
+  hideElements([errorImage], [false]);
   errorImage.src = `https://http.cat/${code}`;
+}
+
+function cleanErrors() {
+  errorText.textContent = "";
 }

@@ -22,13 +22,10 @@ button {
   width: 17rem;
 }
 
-.positive-result {
-  color: red;
-}
-.negative-result {
-  color: green;
+#error-img {
+  width: 100%;
 }
 
-.neutral-result {
-  color: gray;
+[hidden] {
+  display: none !important;
 }
