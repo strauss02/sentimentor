@@ -9,6 +9,7 @@ const textArea = document.querySelector("#input-text");
 
 const polarityText = document.querySelector("#polarity-text");
 const chargeText = document.querySelector("#charge-text");
+const resultHeaders = document.querySelector(".result-headers");
 
 let inputText = textArea.value;
 
@@ -16,6 +17,7 @@ submitButton.addEventListener("click", handleSubmit);
 
 /************************ Main Functions ************************/
 //TODO: Add function docs
+//TODO: disable ability to send empty text
 
 async function handleSubmit() {
   inputText = textArea.value;
@@ -26,6 +28,13 @@ async function handleSubmit() {
   console.log(dataResults.type);
   polarityText.innerText = `Polarity : ${dataResults.polarity}`;
   chargeText.innerText = `Charge : ${dataResults.type}`;
+  colorByPolarity(dataResults.polarity);
+}
+
+//TODO: Fix annoying auto-formatting
+function colorByPolarity(polarity) {
+  resultHeaders.style.color =
+    polarity === 0 ? "gray" : polarity > 0 ? "green" : "red";
 }
 
 async function getResponse(text) {

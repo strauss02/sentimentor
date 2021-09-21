@@ -1,3 +1,9 @@
+button {
+  margin: 1rem;
+  height: 2rem;
+  width: 5rem;
+}
+
 .container {
   width: 20rem;
   padding: 1rem;
@@ -16,8 +22,13 @@
   width: 17rem;
 }
 
-button {
-  margin: 1rem;
-  height: 2rem;
-  width: 5rem;
+.positive-result {
+  color: red;
+}
+.negative-result {
+  color: green;
+}
+
+.neutral-result {
+  color: gray;
 }
