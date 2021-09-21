@@ -10,12 +10,19 @@
 <body>
     <div class="container">
         <h1>Sentimentor</h1>
+
             <label for="input-text">Enter the text you wish to analyse</label>
-            <textarea id="input-text" placeholder="your text here..."></textarea>
+            <textarea
+placeholder="Are you tired of your girlfriend sending ambigious messages? Is your mom giving you strange looks? Or maybe are you just autistic? Have no fear, we got your back.
+
+sentimentor is an app for detecting subliminal and implied context in a message. From now on you can use this tool whenever you feel uncertain of anyone's tone or meaning."
+             id="input-text"  required ></textarea>
+            <p class="error-text"></p>
             <button>submit</button>
     </div>
     
     <div class="container results-container">
+        <div>Loading...</div>
         <h2>Results</h2>
         <div class="result-headers">
             <h4 id="polarity-text">Polarity:</h4>
