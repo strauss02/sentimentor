@@ -1,12 +1,12 @@
 .container {
   width: 20rem;
-  padding: 5rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: space-around;
   align-items: center;
-  margin: 2rem auto;
+  margin: 1rem auto;
   font-family: sans-serif;
 }
 

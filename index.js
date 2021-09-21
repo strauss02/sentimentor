@@ -6,13 +6,26 @@ const text = `We have been through much darker times than these, and somehow eac
 /************************ Select Elements ************************/
 const submitButton = document.querySelector("button");
 const textArea = document.querySelector("#input-text");
+
+const polarityText = document.querySelector("#polarity-text");
+const chargeText = document.querySelector("#charge-text");
+
 let inputText = textArea.value;
 
 submitButton.addEventListener("click", handleSubmit);
 
-function handleSubmit() {
+/************************ Main Functions ************************/
+//TODO: Add function docs
+
+async function handleSubmit() {
   inputText = textArea.value;
-  getResponse(inputText);
+  const data = await getResponse(inputText);
+  let dataResults = data.result;
+  console.log(dataResults);
+  console.log(dataResults.polarity);
+  console.log(dataResults.type);
+  polarityText.innerText = `Polarity : ${dataResults.polarity}`;
+  chargeText.innerText = `Charge : ${dataResults.type}`;
 }
 
 async function getResponse(text) {
@@ -26,6 +39,6 @@ async function getResponse(text) {
   });
   const data = await response.json();
 
-  console.log(response);
   console.log(data);
+  return data;
 }
