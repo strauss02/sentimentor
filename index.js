@@ -12,6 +12,10 @@ const resultHeaders = document.querySelector(".result-headers");
 
 const errorText = document.querySelector(".error-text");
 
+const loadingText = document.querySelector(".loading-section");
+
+const errorImage = document.getElementById("error-img");
+
 let inputText = textArea.value;
 
 submitButton.addEventListener("click", handleSubmit);
@@ -22,9 +26,12 @@ submitButton.addEventListener("click", handleSubmit);
 
 async function handleSubmit() {
   assertTextFilled();
+  hideLoadingAnimation(false);
   inputText = textArea.value;
   const data = await getResponse(inputText);
+  hideLoadingAnimation(true);
   let dataResults = data.result;
+
   polarityText.innerText = `Polarity : ${dataResults.polarity}`;
   chargeText.innerText = `Charge : ${dataResults.type}`;
   colorByPolarity(dataResults.polarity);
@@ -63,4 +70,12 @@ function assertTextFilled() {
     renderError("you must enter some kinda text man");
     throw "not filled";
   }
+}
+
+function hideLoadingAnimation(state) {
+  loadingText.hidden = state;
+}
+
+function showErrorCat(code) {
+  errorImage.src = `https://http.cat/${code}`;
 }
