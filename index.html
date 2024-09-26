@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="main-container container">
+        <div class="container">
+            <h1>Sentimentor</h1>
+                <label for="input-text">Enter the text you wish to analyse</label>
+                <textarea
+                    placeholder="Are you tired of your girlfriend sending ambigious messages? Is your mom giving you strange looks? Or maybe you just have Aspergers? Have no fear, we got your back.&#10;&#10;sentimentor is an app for detecting subliminal and implied context in a message. From now on you can use this tool whenever you feel uncertain of anyone's tone or meaning."
+                    id="input-text"  required ></textarea>
+                <p class="error-text"></p>
+                <button>submit</button>
+        </div>
+        <div class="loading-section" hidden>Loading...
+            <div class="loader"></div>
+        </div>
+
+        <div class="container results-container">
+            <h2>Results</h2>
+            <div class="result-headers">
+                <h4 id="polarity-text">Polarity:</h4>
+                <h4 id="charge-text">Charge:</h4>
+            </div>
+        </div>
+
+        <div class="cat-container container">
+            <img hidden id="error-img" src="" alt="funny cats telling us the error">
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+</html>
